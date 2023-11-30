@@ -1,12 +1,21 @@
 server:
   port: 9080
 
+spring:
   datasource:
-    url: jdbc:mariadb//localhost:3306/photocommunity
+    url: jdbc:mariadb://localhost:3306/photocommunity
     username: photocommunity
     password: 1234
 
 mybatis:
-  type-aliases-package: {mapper resultType}
-  mapper-locations: mybatis/mapper/**/*.xml
+  mapper-locations: mybatis/mapper/*.xml
+  type-aliases:
+    - type: kr.ac.kopo.photocommunity.model.Board
+      alias: Board
+    - type: kr.ac.kopo.photocommunity.model.Member
+      alias: Member
+    - type: kr.ac.kopo.photocommunity.model.Marker
+      alias: Marker
+    - type: kr.ac.kopo.photocommunity.model.Attach
+      alias: Attach
 

@@ -2,10 +2,18 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.kopo.photocommunity.mapper.BoardMapper">
-    <select id="findByCoordId" resultType="Board">
-        SELECT id, title, regdate, member_id, coord_id
+<mapper namespace="board">
+    <select id="findAllByMarkerNum" resultType="Board">
+        SELECT id, title, regdate, member_num, marker_num
         FROM board
         WHERE coord_id = #{coordId}
     </select>
+    <insert id="create" >
+        INSERT INTO board
+        (title, tag, reg_date, member_num, marker_num);
+        VALUES (#{title}, #{tag}, NOW(), #{memberNum}, #{markerNum});
+        <selectKey resultType="Long" order="AFTER" keyProperty="boardNum">
+            SELECT_LAST_INSERT_ID()
+        </selectKey>
+    </insert>
 </mapper>

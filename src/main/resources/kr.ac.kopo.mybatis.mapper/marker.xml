@@ -2,11 +2,18 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.kopo.photocommunity.server.repository.MarkerRepository">
-    <select id="marker.List" resultType="MarkerMapper">
+<mapper namespace="marker">
+    <select id="list" resultType="MarkerMapper">
         SELECT marker.*
         FROM marker
-        WHERE
-
     </select>
+
+    <insert id="create">
+        INSERT INTO marker
+            (lat, lon)
+        VALUES (#{lat}, #{lon})
+        <selectKey resultType="Long" order="AFTER" keyProperty="markerNum">
+            SELECT_LAST_INSERT_ID()
+        </selectKey>
+    </insert>
 </mapper>
